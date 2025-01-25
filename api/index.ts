@@ -12,6 +12,11 @@ type Invite = {
 };
 
 export const fetchInvites = async (): Promise<Invite[]> => {
-  const response = await fetch(`${process.env.API_URL}/invites`);
-  return response.json();
+  try {
+    const response = await fetch(`${process.env.API_URL}/invites`);
+    return response.json();
+  } catch (error) {
+    console.error(error);
+    return [];
+  }
 };
