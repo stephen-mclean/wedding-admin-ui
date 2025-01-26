@@ -9,10 +9,8 @@ export default async function InvitePage({
   const invite = await fetchInvite(code);
 
   return (
-    <div>
-      <h1>
-        {invite?.code} {invite?.id}
-      </h1>
+    <div className="flex flex-col gap-4">
+      <h1 className="text-2xl font-bold">Invite: {invite?.code}</h1>
     </div>
   );
 }

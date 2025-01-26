@@ -7,6 +7,7 @@ import {
   TableRow,
 } from "@/components/ui/table";
 import { fetchInvites } from "@/api";
+import Link from "next/link";
 
 export default async function Home() {
   const invites = await fetchInvites();
@@ -25,7 +26,9 @@ export default async function Home() {
         <TableBody>
           {invites.map((invite) => (
             <TableRow key={invite.id}>
-              <TableCell>{invite.code}</TableCell>
+              <TableCell>
+                <Link href={`/invite/${invite.code}`}>{invite.code}</Link>
+              </TableCell>
               <TableCell>{invite.notes}</TableCell>
               <TableCell>{invite.submitCount}</TableCell>
               <TableCell>

@@ -1,3 +1,5 @@
+"use server";
+
 type Guest = {
   name: string;
   isAttending: boolean;
