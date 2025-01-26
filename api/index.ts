@@ -1,5 +1,7 @@
 "use server";
 
+import { revalidatePath } from "next/cache";
+
 type Guest = {
   name: string;
   isAttending: boolean;
@@ -30,5 +32,14 @@ export const fetchInvite = async (code: string): Promise<Invite | null> => {
   } catch (error) {
     console.error(error);
     return null;
+  }
+};
+
+export const deleteInvite = async (id: number): Promise<void> => {
+  try {
+    await fetch(`${process.env.API_URL}/invite/${id}`, { method: "DELETE" });
+    revalidatePath("/");
+  } catch (error) {
+    console.error(error);
   }
 };

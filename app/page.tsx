@@ -36,6 +36,11 @@ export default async function Home() {
               </TableCell>
             </TableRow>
           ))}
+          {invites.length === 0 && (
+            <TableRow>
+              <TableCell colSpan={4}>No invites found</TableCell>
+            </TableRow>
+          )}
         </TableBody>
       </Table>
     </div>
