@@ -20,3 +20,13 @@ export const fetchInvites = async (): Promise<Invite[]> => {
     return [];
   }
 };
+
+export const fetchInvite = async (code: string): Promise<Invite | null> => {
+  try {
+    const response = await fetch(`${process.env.API_URL}/invite/${code}`);
+    return response.json();
+  } catch (error) {
+    console.error(error);
+    return null;
+  }
+};
