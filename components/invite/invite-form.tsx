@@ -73,7 +73,6 @@ export const InviteForm = ({
   });
 
   const onSubmit = (data: Invite, e?: BaseSyntheticEvent) => {
-    console.log(" ==== onSubmit =====", data, e);
     e?.preventDefault();
     e?.stopPropagation();
     submitInvite(data);

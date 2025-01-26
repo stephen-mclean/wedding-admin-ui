@@ -8,12 +8,18 @@ import {
 } from "@/components/ui/table";
 import { fetchInvites } from "@/api";
 import Link from "next/link";
+import { Button } from "@/components/ui/button";
 
 export default async function Home() {
   const invites = await fetchInvites();
 
   return (
-    <div className="mx-auto max-w-7xl">
+    <div className="mx-auto max-w-7xl flex flex-col gap-4">
+      <div className="flex justify-end">
+        <Link href="/invite/new">
+          <Button>New Invite</Button>
+        </Link>
+      </div>
       <Table>
         <TableHeader>
           <TableRow>
