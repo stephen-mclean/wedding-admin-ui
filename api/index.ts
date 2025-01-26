@@ -9,7 +9,7 @@ type Guest = {
   isPlusOne?: boolean;
 };
 
-type Invite = {
+export type Invite = {
   id: number;
   notes: string;
   submitCount: number;
@@ -24,6 +24,9 @@ export const createInvite = async (invite: CreateInvite): Promise<Invite> => {
   const response = await fetch(`${process.env.API_URL}/invite`, {
     method: "POST",
     body: JSON.stringify(invite),
+    headers: {
+      "Content-Type": "application/json",
+    },
   });
   return response.json();
 };
@@ -32,6 +35,9 @@ export const updateInvite = async (invite: UpdateInvite): Promise<Invite> => {
   const response = await fetch(`${process.env.API_URL}/invite/${invite.id}`, {
     method: "PUT",
     body: JSON.stringify(invite),
+    headers: {
+      "Content-Type": "application/json",
+    },
   });
   return response.json();
 };

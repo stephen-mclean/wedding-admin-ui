@@ -1,5 +1,6 @@
 import { fetchInvite } from "@/api";
 import { DeleteButton } from "@/components/invite/delete-button";
+import { UpdateInvite } from "@/components/invite/update-invite";
 
 export default async function InvitePage({
   params,
@@ -15,6 +16,8 @@ export default async function InvitePage({
         <h1 className="text-2xl font-bold">Invite: {invite?.code}</h1>
         {invite?.id ? <DeleteButton id={invite?.id} /> : null}
       </div>
+
+      {invite ? <UpdateInvite invite={invite} /> : null}
     </div>
   );
 }
