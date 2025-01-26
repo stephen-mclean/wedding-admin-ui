@@ -3,8 +3,10 @@
 import { revalidatePath } from "next/cache";
 
 type Guest = {
+  id?: number;
   name: string;
-  isAttending: boolean;
+  isAttending?: boolean;
+  isPlusOne?: boolean;
 };
 
 type Invite = {
@@ -13,6 +15,25 @@ type Invite = {
   submitCount: number;
   code: string;
   guests: Guest[];
+};
+
+type CreateInvite = Omit<Invite, "id" | "submitCount" | "code">;
+type UpdateInvite = Omit<Invite, "code">;
+
+export const createInvite = async (invite: CreateInvite): Promise<Invite> => {
+  const response = await fetch(`${process.env.API_URL}/invite`, {
+    method: "POST",
+    body: JSON.stringify(invite),
+  });
+  return response.json();
+};
+
+export const updateInvite = async (invite: UpdateInvite): Promise<Invite> => {
+  const response = await fetch(`${process.env.API_URL}/invite/${invite.id}`, {
+    method: "PUT",
+    body: JSON.stringify(invite),
+  });
+  return response.json();
 };
 
 export const fetchInvites = async (): Promise<Invite[]> => {
