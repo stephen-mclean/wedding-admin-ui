@@ -6,12 +6,15 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table";
-import { fetchInvites } from "@/api";
+import { fetchInvites, Invite } from "@/api";
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
 
 export default async function Home() {
   const invites = await fetchInvites();
+
+  const getLiveLink = (invite: Invite) =>
+    `${process.env.LIVE_URL}/${invite.code}`;
 
   return (
     <div className="mx-auto max-w-7xl flex flex-col gap-4">
@@ -24,9 +27,10 @@ export default async function Home() {
         <TableHeader>
           <TableRow>
             <TableHead>Code</TableHead>
+            <TableHead>Live</TableHead>
+            <TableHead>Guests</TableHead>
             <TableHead>Notes</TableHead>
             <TableHead>Submit Count</TableHead>
-            <TableHead>Guests</TableHead>
           </TableRow>
         </TableHeader>
         <TableBody>
@@ -35,11 +39,16 @@ export default async function Home() {
               <TableCell>
                 <Link href={`/invite/${invite.code}`}>{invite.code}</Link>
               </TableCell>
-              <TableCell>{invite.notes}</TableCell>
-              <TableCell>{invite.submitCount}</TableCell>
+              <TableCell>
+                <Link href={getLiveLink(invite)} target="_blank">
+                  Live
+                </Link>
+              </TableCell>
               <TableCell>
                 {invite.guests.map((guest) => guest.name).join(", ")}
               </TableCell>
+              <TableCell>{invite.notes}</TableCell>
+              <TableCell>{invite.submitCount}</TableCell>
             </TableRow>
           ))}
           {invites.length === 0 && (

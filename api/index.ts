@@ -44,7 +44,9 @@ export const updateInvite = async (invite: UpdateInvite): Promise<Invite> => {
 
 export const fetchInvites = async (): Promise<Invite[]> => {
   try {
-    const response = await fetch(`${process.env.API_URL}/invites`);
+    const response = await fetch(`${process.env.API_URL}/invites`, {
+      cache: "no-store",
+    });
     return response.json();
   } catch (error) {
     console.error(error);
@@ -54,7 +56,9 @@ export const fetchInvites = async (): Promise<Invite[]> => {
 
 export const fetchInvite = async (code: string): Promise<Invite | null> => {
   try {
-    const response = await fetch(`${process.env.API_URL}/invite/${code}`);
+    const response = await fetch(`${process.env.API_URL}/invite/${code}`, {
+      cache: "no-store",
+    });
     return response.json();
   } catch (error) {
     console.error(error);
